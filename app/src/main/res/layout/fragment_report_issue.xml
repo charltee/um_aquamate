@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:accessibilityHeading="true"
+            android:text="@string/report_heading"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/report_subtitle"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/ivReportPreview"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/card_white"
+            android:contentDescription="@string/desc_dispenser_photo"
+            android:padding="40dp"
+            android:src="@drawable/ic_camera"
+            app:tint="@color/um_blue_primary" />
+
+        <Button
+            android:id="@+id/btnCapturePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/um_teal_accent"
+            android:text="@string/btn_take_photo"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_location"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinnerUmLocation"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/card_white"
+            android:entries="@array/um_locations" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_issue_type"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/rgIssueType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
+
+            <RadioButton
+                android:id="@+id/rbLeak"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/issue_leak"
+                android:textColor="@color/text_primary" />
+
+            <RadioButton
+                android:id="@+id/rbDirty"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/issue_dirty"
+                android:textColor="@color/text_primary" />
+
+            <RadioButton
+                android:id="@+id/rbEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/issue_empty"
+                android:textColor="@color/text_primary" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etReportNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@color/card_white"
+            android:hint="@string/notes_hint"
+            android:inputType="textCapSentences|textMultiLine"
+            android:minHeight="64dp"
+            android:padding="12dp"
+            android:textColor="@color/text_primary" />
+
+        <Button
+            android:id="@+id/btnSubmitReport"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/um_blue_primary"
+            android:text="@string/btn_submit_report"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mapFragment">
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.um_aquamate.MapFragment"
+        android:label="@string/nav_map"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_mapFragment_to_dispenserDetailFragment"
+            app:destination="@id/dispenserDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dispenserListFragment"
+        android:name="com.example.um_aquamate.DispenserListFragment"
+        android:label="@string/nav_list"
+        tools:layout="@layout/fragment_dispenser_list" />
+
+    <fragment
+        android:id="@+id/reportIssueFragment"
+        android:name="com.example.um_aquamate.ReportIssueFragment"
+        android:label="@string/nav_report"
+        tools:layout="@layout/fragment_report_issue" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.um_aquamate.ProfileFragment"
+        android:label="@string/nav_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/dispenserDetailFragment"
+        android:name="com.example.um_aquamate.DispenserDetailFragment"
+        android:label="@string/nav_detail"
+        tools:layout="@layout/fragment_dispenser_detail">
+        <action
+            android:id="@+id/action_dispenserDetailFragment_to_reportIssueFragment"
+            app:destination="@id/reportIssueFragment" />
+    </fragment>
+</navigation>

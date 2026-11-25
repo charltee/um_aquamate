@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">UM AquaMate</string>
+
+    <!-- Bottom Navigation Tabs -->
+    <string name="nav_map">Campus Map</string>
+    <string name="nav_list">Dispensers</string>
+    <string name="nav_report">Report</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_detail">Dispenser Details</string>
+
+    <!-- Map Screen -->
+    <string name="search_hint">Search faculty or college (e.g., FSKTM, KK8)</string>
+    <string name="filter_all">All</string>
+    <string name="filter_cold">Cold Water</string>
+    <string name="filter_hot">Hot Water</string>
+    <string name="btn_view_sample_pin">Inspect Nearest Pin (FSKTM)</string>
+
+    <!-- Detail Screen -->
+    <string name="detail_title">FSKTM Block A - Ground Floor</string>
+    <string name="detail_status">Status: Working Properly</string>
+    <string name="detail_temp">Available: Cold &amp; Room Temp</string>
+    <string name="detail_cleanliness">Cleanliness Rating: 4.6 / 5.0 (28 reviews)</string>
+    <string name="btn_directions">Walk Here (120m)</string>
+    <string name="btn_report_this">Report Issue at This Dispenser</string>
+
+    <!-- Report Screen (AI Feature) -->
+    <string name="report_heading">Report Dispenser Issue</string>
+    <string name="report_subtitle">Snap a photo—our AI categorizes leaks or damage for JPPHB.</string>
+    <string name="btn_take_photo">Capture Dispenser Photo</string>
+    <string name="label_location">Select UM Location</string>
+    <string name="label_issue_type">Issue Category (Auto-filled by AI or Manual)</string>
+    <string name="issue_leak">Water Leak / Pipe Damage</string>
+    <string name="issue_dirty">Dirty / Unhygienic Area</string>
+    <string name="issue_empty">No Water / Power Off</string>
+    <string name="notes_hint">Additional details (e.g., Level 2 near lift)</string>
+    <string name="btn_submit_report">Submit Report to JPPHB</string>
+
+    <!-- List Screen -->
+    <string name="list_heading">Nearest UM Dispensers</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_heading">Student Sustainability Profile</string>
+    <string name="profile_name">UM Student Contributor</string>
+    <string name="profile_stats">14 Reports Verified • ~42 Plastic Bottles Saved</string>
+    <string name="switch_large_text">High-Contrast / Large Text Mode</string>
+
+    <!-- Accessibility Content Descriptions -->
+    <string name="desc_dispenser_photo">Photograph of water dispenser</string>
+    <string name="desc_status_icon">Operational status icon</string>
+
+    <!-- UM Locations Array for Spinner -->
+    <string-array name="um_locations">
+        <item>FSKTM - Block A (Ground Floor)</item>
+        <item>FSKTM - Block B (Level 1)</item>
+        <item>Main Library (Perpustakaan Utama)</item>
+        <item>KK8 (Kolej Kediaman Kinabalu) - Block B</item>
+        <item>KK12 (Kolej Kediaman Raja Dr. Nazrin Shah)</item>
+        <item>Faculty of Engineering - Block J</item>
+        <item>Faculty of Science - Dewan Kuliah 1</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

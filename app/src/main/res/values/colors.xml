@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary UM AquaMate Brand Colours -->
+    <color name="um_blue_primary">#005A8D</color>
+    <color name="um_blue_dark">#003B5C</color>
+    <color name="um_teal_accent">#00796B</color>
+
+    <!-- Backgrounds & Surfaces -->
+    <color name="bg_surface">#F4F8FB</color>
+    <color name="card_white">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- High-Contrast Typography -->
+    <color name="text_primary">#111827</color>
+    <color name="text_secondary">#4B5563</color>
+
+    <!-- Status Badges (High Contrast) -->
+    <color name="status_working">#1B7F37</color>
+    <color name="status_warning">#B45309</color>
+    <color name="status_broken">#B91C1C</color>
+</resources>
