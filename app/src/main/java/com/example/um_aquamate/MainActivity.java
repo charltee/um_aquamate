@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -39,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
 
             BottomNavigationView bottomNav = findViewById(R.id.bottomNavView);
             NavigationUI.setupWithNavController(bottomNav, navController);
+
+            // Ensure tapping any bottom navigation tab pops sub-screens cleanly back to that tab
+            bottomNav.setOnItemSelectedListener(item -> {
+                NavOptions options = new NavOptions.Builder()
+                        .setLaunchSingleTop(true)
+                        .setPopUpTo(navController.getGraph().getStartDestinationId(), false)
+                        .build();
+                try {
+                    navController.navigate(item.getItemId(), null, options);
+                    return true;
+                } catch (IllegalArgumentException e) {
+                    return false;
+                }
+            });
         }
     }
 

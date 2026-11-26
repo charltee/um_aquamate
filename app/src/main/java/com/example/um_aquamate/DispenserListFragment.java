@@ -1,64 +1,137 @@
 package com.example.um_aquamate;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DispenserListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DispenserListFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private AquaMateViewModel viewModel;
+    private final List<Dispenser> currentItems = new ArrayList<>();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DispenserListFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DispenserListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DispenserListFragment newInstance(String param1, String param2) {
-        DispenserListFragment fragment = new DispenserListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_dispenser_list, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ListView lvDispensers = view.findViewById(R.id.lvDispensers);
+        if (lvDispensers == null) return;
+
+        viewModel = new ViewModelProvider(requireActivity()).get(AquaMateViewModel.class);
+
+        BaseAdapter adapter = new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return currentItems.size();
+            }
+
+            @Override
+            public Dispenser getItem(int position) {
+                return currentItems.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                LinearLayout rowLayout;
+                TextView tvTitle;
+                TextView tvSubtitle;
+
+                if (convertView instanceof LinearLayout) {
+                    rowLayout = (LinearLayout) convertView;
+                    tvTitle = (TextView) rowLayout.getChildAt(0);
+                    tvSubtitle = (TextView) rowLayout.getChildAt(1);
+                } else {
+                    rowLayout = new LinearLayout(requireContext());
+                    rowLayout.setOrientation(LinearLayout.VERTICAL);
+                    rowLayout.setPadding(36, 28, 36, 28);
+                    rowLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.card_white));
+
+                    tvTitle = new TextView(requireContext());
+                    tvTitle.setTextSize(16f);
+                    tvTitle.setTypeface(null, Typeface.BOLD);
+                    tvTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary));
+
+                    tvSubtitle = new TextView(requireContext());
+                    tvSubtitle.setTextSize(14f);
+                    tvSubtitle.setPadding(0, 8, 0, 0);
+
+                    rowLayout.addView(tvTitle);
+                    rowLayout.addView(tvSubtitle);
+                }
+
+                Dispenser d = getItem(position);
+                tvTitle.setText(d.getName());
+
+                String status = d.getStatus() != null ? d.getStatus() : "Working";
+                String statusIcon;
+                int colorRes;
+
+                if ("Working".equalsIgnoreCase(status)) {
+                    statusIcon = "● Working";
+                    colorRes = R.color.status_working;
+                } else if ("Warning".equalsIgnoreCase(status)) {
+                    statusIcon = "▲ Needs Attention";
+                    colorRes = R.color.status_warning;
+                } else {
+                    statusIcon = "■ Broken";
+                    colorRes = R.color.status_broken;
+                }
+
+                tvSubtitle.setText(String.format("%s  •  %dm away  •  %s",
+                        statusIcon, d.getDistanceMeters(), d.getTempSummary()));
+                tvSubtitle.setTextColor(ContextCompat.getColor(requireContext(), colorRes));
+
+                return rowLayout;
+            }
+        };
+
+        lvDispensers.setAdapter(adapter);
+
+        viewModel.getDispenserList().observe(getViewLifecycleOwner(), dispensers -> {
+            currentItems.clear();
+            if (dispensers != null) {
+                currentItems.addAll(dispensers);
+            }
+            adapter.notifyDataSetChanged();
+        });
+
+        lvDispensers.setOnItemClickListener((parent, itemView, position, id) -> {
+            if (position >= 0 && position < currentItems.size()) {
+                Dispenser selected = currentItems.get(position);
+                viewModel.selectDispenser(selected);
+                try {
+                    NavHostFragment.findNavController(DispenserListFragment.this)
+                            .navigate(R.id.action_dispenserListFragment_to_dispenserDetailFragment);
+                } catch (Exception e) {
+                    Toast.makeText(requireContext(), "无法打开详情页: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

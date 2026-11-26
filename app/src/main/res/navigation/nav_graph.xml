@@ -19,7 +19,11 @@
         android:id="@+id/dispenserListFragment"
         android:name="com.example.um_aquamate.DispenserListFragment"
         android:label="@string/nav_list"
-        tools:layout="@layout/fragment_dispenser_list" />
+        tools:layout="@layout/fragment_dispenser_list">
+        <action
+            android:id="@+id/action_dispenserListFragment_to_dispenserDetailFragment"
+            app:destination="@id/dispenserDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/reportIssueFragment"
@@ -40,6 +44,10 @@
         tools:layout="@layout/fragment_dispenser_detail">
         <action
             android:id="@+id/action_dispenserDetailFragment_to_reportIssueFragment"
-            app:destination="@id/reportIssueFragment" />
+            app:destination="@id/reportIssueFragment"
+            app:popUpTo="@id/mapFragment"
+            app:popUpToInclusive="false" />
     </fragment>
+
+
 </navigation>

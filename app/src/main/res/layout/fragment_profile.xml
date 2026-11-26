@@ -49,4 +49,13 @@
         android:textColor="@color/text_primary"
         android:textSize="15sp" />
 
+    <TextView
+        android:id="@+id/tvProfileStats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/profile_stats"
+        android:textColor="@color/status_working"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 </LinearLayout>
